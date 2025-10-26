@@ -1,4 +1,4 @@
-name: Deploy React App
+name: Deploy Shadowverse Tracker
 
 on:
   push:
@@ -10,23 +10,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Récupère le code
       - uses: actions/checkout@v3
 
+      # 2️⃣ Installe Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
+      # 3️⃣ Installe les dépendances dans le sous-dossier app
       - name: Install dependencies
         run: npm ci
         working-directory: ./app
 
+      # 4️⃣ Build de l'application
       - name: Build project
         run: npm run build
         working-directory: ./app
 
+      # 5️⃣ Déploiement sur GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v6
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./app/dist
+          # Nom et email pour le commit automatique
+          user_name: "GitHub Actions"
+          user_email: "actions@github.com"
+          # Nettoie la branche gh-pages avant de publier
+          clean: true
