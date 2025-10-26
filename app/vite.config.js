@@ -1,8 +1,9 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
+// Remplace "tonNomUtilisateur" et "shadowverse-tracker" par ton nom GitHub et le nom du repo
 export default defineConfig({
+  base: '/shadowverse-tracker/', 
   plugins: [
     react({
       babel: {
@@ -10,4 +11,4 @@ export default defineConfig({
       },
     }),
   ],
-})
+});
